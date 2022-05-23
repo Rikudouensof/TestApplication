@@ -51,7 +51,11 @@ namespace TestApplication.Core.Repository
     public IEnumerable<User> GetAll()
     {
       var users = _db.Users.OrderBy(u => u.FirstName);
-      _db.Entry<User>(user).State = EntityState.Detached;
+      foreach (var user in users)
+      {
+        _db.Entry<User>(user).State = EntityState.Detached;
+      }
+     
       return users;
     }
 
